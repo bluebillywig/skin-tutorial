@@ -1,0 +1,22 @@
+.controlbar {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #FFF;
+	max-width: 400px;
+	width: 100%;
+	margin: 20px auto;
+	padding: 10px 20px;
+	border-radius: 5px;
+}
+
+.button {
+	font-size: 22px;
+	padding: 4px;
+}
+
+.button-container-left .button {
+	float: left;
+}
+
+.button-container-right .button {
+	float: right;
+}
