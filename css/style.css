@@ -1,0 +1,75 @@
+/* Colors:
+$blue:				#7AB1DF;
+$darkblue:			#5B8BC0;
+$lightblue:			#C5DFF7;
+$whiteblue:			#EAF2FA;
+
+$darkbrown:			#80715D;
+$lightbrown:		#B3ABA1;
+
+$orange:			#F8B02B;
+$red: 				#E54F2D;
+$green:				#B7D26B;
+$pink:				#E96E8E;
+
+$black:				#555;
+$dark-gray:			#888;
+$gray:				#CCC;
+$offblack:			#3C434A;
+
+$white: 			#FFF;
+$offwhite:			#F4F4F4;
+*/
+
+html, body {
+	color: #F4F4F4;
+	font-family: Helvetica, Arial, sans-serif;
+	line-height: 150%;
+	color: #555;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 120%;
+}
+a {
+	color: #7AB1DF;
+	text-decoration: none;
+}
+
+.container {
+	max-width: 600px;
+	margin: 40px auto;
+	padding: 0 10px;
+}
+
+/* Player */
+.controlbar {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #FFF;
+	max-width: 400px;
+	width: 100%;
+	margin: 20px auto;
+	padding: 10px 20px;
+	border-radius: 5px;
+}
+
+.time {
+	color: rgba(255, 255, 255, 0.8);
+	text-align: center;
+	font-size: 12px;
+	line-height: 12px;
+}
+
+.button {
+	font-size: 22px;
+	padding: 4px;
+	float: left;
+}
+
+.button-container-left .button {
+	float: left;
+}
+
+.button-container-right .button {
+	float: right;
+}

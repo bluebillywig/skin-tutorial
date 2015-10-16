@@ -27,35 +27,40 @@ All JavaScript code related to the skin will be written in a single object, plea
 In order to listen to events from the players and use methods available in the API, we have to get the player object. We will insert a Blue Billywig player with the Launchpad, using an example clip and a playout we created for this tutorial:
 
 `player.js`
-	
-	// Create a new object for all player logic.
-	var myPlayer = {};
-	
-	// Add an API variable containing the Blue Billywig player
-	myPlayer.api = new bluebillywig.Player( "http://bluebillywig.bbvms.com/p/skin-tutorial/c/2530517.json", {
-		target : $('#player')[0]
-	});
+
+[javascript]	
+// Create a new object for all player logic.
+var myPlayer = {};
+
+// Add an API variable containing the Blue Billywig player
+myPlayer.api = new bluebillywig.Player( "http://bluebillywig.bbvms.com/p/skin-tutorial/c/2530517.json", {
+	target : $('#player')[0]
+});
+[/javascript]
 	
 And the HTML that loads the script and contains a div element in which the player will be rendered:
 
 `index.html`
 
-	<script src="http://bluebillywig.bbvms.com/launchpad/"></script>
-	
-	<div id="player">
-	</div>
+[html]
+<script src="http://bluebillywig.bbvms.com/launchpad/"></script>
 
+<div id="player">
+</div>
+[/html]
 
 In our playout options, we disable every visual element we can find: Hide the controlbar, the big play button, title and related items. The only thing that will be visible is the video itself. The size is also set to 100% width and height, since we want our skin to decide on the player size. For now, we will use a static 1280x720:
 
-`style.css`
+`player.css`
 
-	#player {
-		position: relative;
-		height: 720px;
-		width: 1280px;
-		margin: 20px auto;
-	}
+[css]
+#player {
+	position: relative;
+	height: 720px;
+	width: 1280px;
+	margin: 20px auto;
+}
+[/css]
 
 ## The skin container
 
@@ -63,31 +68,35 @@ Since we want our skin to appear on top of the video, we create a new element (`
 
 `index.html`
 
-	<div id="player">
-		<div class="skin">
-			<div class="controlbar"></div>
-		</div>
+[html]
+<div id="player">
+	<div class="skin">
+		<div class="controlbar"></div>
 	</div>
+</div>
+[/html]
 
 `player.css`
 
-	.skin {
-		/* Overlay skin on top of the video */
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
-	}
-	
-	.controlbar {
-		/* Stick controlbar to the bottom of the skin */
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-	}
+[css]
+.skin {
+	/* Overlay skin on top of the video */
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.controlbar {
+	/* Stick controlbar to the bottom of the skin */
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+[/css]
 
 ## Adding a play and pause button
 
@@ -95,14 +104,16 @@ Now for the fun part! Let's add some buttons to our skin:
 
 `index.html`
 
-	<div class="controlbar">
-		<div class="button play">
-			<i class="fa fa-play"></i>
-		</div>
-		<div class="button pause">
-			<i class="fa fa-pause"></i>
-		</div>
+[html]
+<div class="controlbar">
+	<div class="button play">
+		<i class="fa fa-play"></i>
 	</div>
+	<div class="button pause">
+		<i class="fa fa-pause"></i>
+	</div>
+</div>
+[/html]
 
 *"Woah, two separate buttons for playing and pausing?"*
 
@@ -110,20 +121,22 @@ Yes! We will be using a class on our `#player` element that specifies wether the
 
 `player.css`
 
-	/* Show play button on default */
-	.pause.button {
-		display: none;
-	}
-	.play.button {
-		display: block;
-	}
-	
-	#player.playing .play.button {
-		display: none;
-	}
-	#player.playing .pause.button {
-		display: block;
-	}
+[css]
+/* Show play button on default */
+.pause.button {
+	display: none;
+}
+.play.button {
+	display: block;
+}
+
+#player.playing .play.button {
+	display: none;
+}
+#player.playing .pause.button {
+	display: block;
+}
+[/css]
 
 ### Using methods to control the player
 
@@ -131,43 +144,49 @@ In order for the buttons to actually do something, we have to bind a function to
 
 `player.js`
 
-	myPlayer.play = function(){
-		this.api.play();
-	};
-	
-	myPlayer.pause = function(){
-		this.api.pause();
-	};
+[javascript]
+myPlayer.play = function(){
+	this.api.play();
+};
+
+myPlayer.pause = function(){
+	this.api.pause();
+};
+[/javascript]
 
 Next, we need to bind the buttons to these functions. We create an `init()` function that will take care of all these bindings and other logic that has to be executed once.
 
 `player.js`
+
+[javascript]	
+myPlayer.init = function(targetContainer){
+	this.$container = $(targetContainer);
+	// Find the skin container
+	this.$skin = this.$container.find('.skin');
+	// Find the controlbar
+	this.$controlbar = this.$skin.find('.controlbar');
 	
-	myPlayer.init = function(targetContainer){
-		this.$container = $(targetContainer);
-		// Find the skin container
-		this.$skin = this.$container.find('.skin');
-		// Find the controlbar
-		this.$controlbar = this.$skin.find('.controlbar');
-		
-		// Bind elements
-		this.$controlbar.find('.play.button').on('click', $.proxy(this.play, this));
-		this.$controlbar.find('.pause.button').on('click', $.proxy(this.pause, this));
-	};
+	// Bind elements
+	this.$controlbar.find('.play.button').on('click', $.proxy(this.play, this));
+	this.$controlbar.find('.pause.button').on('click', $.proxy(this.pause, this));
+};
+[/javascript]
 
 In order to execute this function correctly, we have to bind it to the `ready` event from the API. Since we cannot bind directly on the player at this moment (since it does not yet exist), we bind it to the parent element to which the event bubbles. It is important that we bind this function *before* we load the player:
 
 `player.js`
 
-	// Listen to ready event that bubbles from the player
-	$('#player').on('ready', function(){
-		myPlayer.init(this);
-	});
-	
-	// Add an API variable containing the Blue Billywig player
-	myPlayer.api = new bluebillywig.Player( "http://bluebillywig.bbvms.com/p/skin-tutorial/c/2530517.json", {
-		target : $('#player')[0]
-	});
+[javascript]
+// Listen to ready event that bubbles from the player
+$('#player').on('ready', function(){
+	myPlayer.init(this);
+});
+
+// Add an API variable containing the Blue Billywig player
+myPlayer.api = new bluebillywig.Player( "http://bluebillywig.bbvms.com/p/skin-tutorial/c/2530517.json", {
+	target : $('#player')[0]
+});
+[/javascript]
 
 Right now, we should be able to start the player using the start button! But still one thing is missing: The play button does not change into a pause button. This is where we will experience the convenience of the CSS styling that switches the buttons.
 
@@ -179,25 +198,29 @@ In our init function, we will add the event handlers that are bound to the API:
 
 `player.js`
 
-	// Bind api events
-	this.api.on('playing', $.proxy(this.onPlaying, this));
-	this.api.on('pause', $.proxy(this.onPause, this));
-	
-	this.playing = false;
+[javascript]
+// Bind api events
+this.api.on('playing', $.proxy(this.onPlaying, this));
+this.api.on('pause', $.proxy(this.onPause, this));
+
+this.playing = false;
+[/javascript]
 	
 And we create two functions that are executed:
 
 `player.js`
 
-	myPlayer.onPlaying = function(){
-		// Logically, the video isn't paused when it's playing
-		this.$container.removeClass('paused').addClass('playing');
-	};
-	
-	myPlayer.onPause = function(){
-		// Logically, the video isn't playing when it's paused
-		this.$container.removeClass('playing').addClass('paused');
-	};
+[javascript]
+myPlayer.onPlaying = function(){
+	// Logically, the video isn't paused when it's playing
+	this.$container.removeClass('paused').addClass('playing');
+};
+
+myPlayer.onPause = function(){
+	// Logically, the video isn't playing when it's paused
+	this.$container.removeClass('playing').addClass('paused');
+};
+[/javascript]
 
 You will notice that the player also throws a pause event at the end of the video, and that issuing a play command starts playing the video from the start. For now, this is the intended behaviour, but we could change it later on using the `ended` event.
 
@@ -209,43 +232,53 @@ The mute button is in many ways very similar to the play / pause button, which m
 
 `index.html`
 
-	<div class="mute button">
-		<i class="fa fa-volume-up"></i>
-	</div>
-	<div class="unmute button">
-		<i class="fa fa-volume-off"></i>
-	</div>
+[html]
+<div class="mute button">
+	<i class="fa fa-volume-up"></i>
+</div>
+<div class="unmute button">
+	<i class="fa fa-volume-off"></i>
+</div>
+[/html]
 
 `player.css`
-	
-	/* Show mute button on default */
-	.pause.unmute {
-		display: none;
-	}
-	.play.mute {
-		display: block;
-	}
-	
-	#player.muted .mute.button {
-		display: none;
-	}
-	#player.muted .unmute.button {
-		display: block;
-	}
-	
+
+[css]
+/* Show mute button on default */
+.pause.unmute {
+	display: none;
+}
+.play.mute {
+	display: block;
+}
+
+#player.muted .mute.button {
+	display: none;
+}
+#player.muted .unmute.button {
+	display: block;
+}
+[/css]
+
 `player.js`
-	
-	myPlayer.mute = function(){
-		this.api.setMuted(true);
-	};
-	myPlayer.unmute = function(){
-		this.api.setMuted(false);
-	};
+
+[javascript]	
+myPlayer.mute = function(){
+	this.api.setMuted(true);
+};
+myPlayer.unmute = function(){
+	this.api.setMuted(false);
+};
+[/javascript]
 
 In the `init` function:
 
-	this.$controlbar.find('.mute.button').on('click', $.proxy(this.mute, this));
-	this.$controlbar.find('.unmute.button').on('click', $.proxy(this.unmute, this));
+`player.js`
+
+[javascript]
+this.$controlbar.find('.mute.button').on('click', $.proxy(this.mute, this));
+this.$controlbar.find('.unmute.button').on('click', $.proxy(this.unmute, this));
+[/javascript]
 
 *"But wait, there are not `muted` and `unmuted` events!"*
 
@@ -253,19 +286,23 @@ This is correct. Instead, there is a `volumechange` event which indicates some f
 
 `player.js`
 
-	this.api.on('volumechange', $.proxy(this.onVolumeChange, this));
+[javascript]
+this.api.on('volumechange', $.proxy(this.onVolumeChange, this));
+[/javascript]
 
 The result is that our `onVolumeChange` function gets a little bit more interesting. For now, we only have to deal with the muted status:
 
 `player.js`
 
-	myPlayer.onVolumeChange = function(){
-		if(this.api.getMuted() == true){
-			this.$container.addClass('muted');
-		} else {
-			this.$container.removeClass('muted');
-		}
-	};
+[javascript]
+myPlayer.onVolumeChange = function(){
+	if(this.api.getMuted() == true){
+		this.$container.addClass('muted');
+	} else {
+		this.$container.removeClass('muted');
+	}
+};
+[/javascript]
 
 For every volume change, we get the muted status from the API and add or remove the classes. If we extend our skin with a volume control later on, we will extend this function.
 
@@ -275,43 +312,55 @@ Not everything in our skin is a button, some things just display something. Lets
 
 `index.html`
 
-	<div class="time">
-		<span class="elapsed">00:00</span>/<span class="duration">00:00</span>
-	</div>
-	
+[html]
+<div class="time">
+	<span class="elapsed">00:00</span>/<span class="duration">00:00</span>
+</div>
+[/html]
+
 `player.js`
 
-	this.$time = this.$controlbar.find('.time');
+[javascript]
+this.$time = this.$controlbar.find('.time');
+[/javascript]
 
 First, the duration (or total time) of the video. We can use the `getDuration` method in the api to get the duration of the video. We do this when the `durationchange` event has been thrown:
 
 `player.js`
-	
-	this.api.on('durationchange', $.proxy(this.onDurationChange, this));
+
+[javascript]
+this.api.on('durationchange', $.proxy(this.onDurationChange, this));
+[/javascript]
 
 In our onDurationChange event, we get the duration and print it into the desired element. Since the duration is returned in seconds, we need a function to convert it to something that is formatted. We can insert the formatted string into the element.
 
 `player.js`
 
-	myPlayer.onDurationChange = function(){
-		var duration = this.api.getDuration();
-		this.$time.find('.duration').html(this.formatSeconds(duration));
-	};
+[javascript]
+myPlayer.onDurationChange = function(){
+	var duration = this.api.getDuration();
+	this.$time.find('.duration').html(this.formatSeconds(duration));
+};
+[/javascript]
 
 The same procedure is followed with the elapsed time, using the `timeupdate` event:
 
 `player.js`
 
-	this.api.on('timeupdate', $.proxy(this.onTimeUpdate, this));
+[javascript]
+this.api.on('timeupdate', $.proxy(this.onTimeUpdate, this));
+[/javascript]
 
 Note that the `timeupdate` event is throttled due to performance reasons. This doesn't matter for now, since we only display seconds.
 
 `player.js`
 
-	myPlayer.onTimeUpdate = function(){
-		var currentTime = this.api.getCurrentTime();
-		this.$time.find('.elapsed').html(this.formatSeconds(currentTime));
-	};
+[javascript]
+myPlayer.onTimeUpdate = function(){
+	var currentTime = this.api.getCurrentTime();
+	this.$time.find('.elapsed').html(this.formatSeconds(currentTime));
+};
+[/javascript]
 
 The way the time is formatted is fully customisable, and allows you to use elapsed time, remaining time, or even percentages. Do remember to account for videos that are more than an hour long. Even if you have none of those right now, they might be used in the future!
 
