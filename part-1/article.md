@@ -18,7 +18,7 @@ An overview of all available events and methods is available on the Blue Billywi
 
 ## Initial setup
 
-Our code will exist of three things every front-end developer will be familiair with: HTML, CSS and JavaScript. We will create an initial file structure and an `index.html` that includes the CSS and JavaScript files. We use jQuery to make our life easy, and [Font-Awesome](http://fontawesome.io/) for our graphics. Since the example will not be used in a production environment, it will be using CSS techniques that might not be supported on all browsers.
+Our code will consist of three things every front-end developer will be familiair with: HTML, CSS and JavaScript. We will create an initial file structure and an `index.html` that includes the CSS and JavaScript files. We use jQuery to make our life easy, and [Font-Awesome](http://fontawesome.io/) for our graphics. Since the example will not be used in a production environment, it will be using CSS techniques that might not be supported on all browsers.
 
 All JavaScript code related to the skin will be written in a single object, please refer to the [MDN Introduction to Object-Oriented Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript) for more information on objects in JavaScript. Furthermore, it might be useful to initialise the skin when a player is found on the page. For the sake of simplicity, that won't be covered in this tutorial.
 
@@ -332,7 +332,7 @@ First, the duration (or total time) of the video. We can use the `getDuration` m
 this.api.on('durationchange', $.proxy(this.onDurationChange, this));
 [/javascript]
 
-In our onDurationChange event, we get the duration and print it into the desired element. Since the duration is returned in seconds, we need a function to convert it to something that is formatted. We can insert the formatted string into the element.
+In our onDurationChange event handler, we get the duration and print it into the desired element. Since the duration is returned in seconds, we need a function to convert it to something that is formatted. We can insert the formatted string into the element.
 
 `player.js`
 
