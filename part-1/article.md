@@ -1,6 +1,4 @@
-# Skinning the Blue Billywig player - Part 1: Basic controls
-
-In June 2014, we released our new online video player with version five. One of the biggest changes was an all new JavaScript API which enabled every script to take full control of the player. In this step-by-step guide we will build a new, custom skin using HTML, CSS and JavaScript. The end result can be viewed at **%TODO[INSERT LINK]**.
+In June 2014, we released our new online video player with version five. One of the biggest changes was an all new JavaScript API which enabled every script to take full control of the player. In this step-by-step guide we will build a new, custom skin using HTML, CSS and JavaScript. The end result can be viewed at the [GitHub page](http://bluebillywig.github.io/skin-tutorial/part-1/)).
 
 ## First things first
 
@@ -18,7 +16,7 @@ An overview of all available events and methods is available on the Blue Billywi
 
 ## Initial setup
 
-Our code will consist of three things every front-end developer will be familiair with: HTML, CSS and JavaScript. We will create an initial file structure and an `index.html` that includes the CSS and JavaScript files. We use jQuery to make our life easy, and [Font-Awesome](http://fontawesome.io/) for our graphics. Since the example will not be used in a production environment, it will be using CSS techniques that might not be supported on all browsers.
+Our code will exist of three things every front-end developer will be familiair with: HTML, CSS and JavaScript. We will create an initial file structure and an `index.html` that includes the CSS and JavaScript files. We use jQuery to make our life easy, and [Font-Awesome](http://fontawesome.io/) for our graphics. Since the example will not be used in a production environment, it will be using CSS techniques that might not be supported on all browsers.
 
 All JavaScript code related to the skin will be written in a single object, please refer to the [MDN Introduction to Object-Oriented Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript) for more information on objects in JavaScript. Furthermore, it might be useful to initialise the skin when a player is found on the page. For the sake of simplicity, that won't be covered in this tutorial.
 
@@ -332,7 +330,7 @@ First, the duration (or total time) of the video. We can use the `getDuration` m
 this.api.on('durationchange', $.proxy(this.onDurationChange, this));
 [/javascript]
 
-In our onDurationChange event handler, we get the duration and print it into the desired element. Since the duration is returned in seconds, we need a function to convert it to something that is formatted. We can insert the formatted string into the element.
+In our onDurationChange event, we get the duration and print it into the desired element. Since the duration is returned in seconds, we need a function to convert it to something that is formatted. We can insert the formatted string into the element.
 
 `player.js`
 
@@ -364,8 +362,8 @@ myPlayer.onTimeUpdate = function(){
 
 The way the time is formatted is fully customisable, and allows you to use elapsed time, remaining time, or even percentages. Do remember to account for videos that are more than an hour long. Even if you have none of those right now, they might be used in the future!
 
-## Conclusion
+## Wrapping up
 
 That's it! We created a very simple skin with the Blue Billywig Player API, with a play / pause button, a mute / unmute button and a time display. There are many more features that can be implemented, but those will be covered in future posts. If you want to be kept informed, please subscribe to our newsletter at the top of this page!
 
-The end result is available at **TODO: INSERT LINK**. To view the full code, please visit the [Github page](https://github.com/bluebillywig/skin-tutorial) with the source code.
+The end result is available at the [GitHub page](http://bluebillywig.github.io/skin-tutorial/part-1/). To view the full code, please visit the [Github page](https://github.com/bluebillywig/skin-tutorial) with the source code.
