@@ -298,7 +298,6 @@ Right now, the volume indicator will display the correct volume. However, it isn
 	};
 	myPlayer.volumeMove = function(ev){
 		var position = this.getPosInElement(ev, myPlayer.$volumeSlider);
-		console.log(position);
 		this.updateVolumeSlider(position.x);
 		this.api.setVolume(position.x);
 	};
@@ -309,3 +308,8 @@ Right now, the volume indicator will display the correct volume. However, it isn
 		$(document).off('mousemove touchmove', this.volumeMove);
 		$(document).off('mouseup touchend', this.volumeEnd);
 	};
+
+## The quality selector
+
+The Blue Billywig Online Video Platform generates multiple assets for each video, to ensure the best possible playback experience. However, some users might want to manually adjust the quality they are seeing. We will render a list of all available *assets* (our name for the same videos with different qualities), indicating the active asset and the ability to select another one.
+

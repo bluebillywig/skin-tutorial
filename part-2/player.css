@@ -73,3 +73,13 @@
 	height: 100%;
 	width: 100%;
 }
+
+.quality-selector {
+	
+}
+.quality-selector .quality-list {
+	display: none;
+}
+.quality-selector:hover .quality-list {
+	display: block;
+}

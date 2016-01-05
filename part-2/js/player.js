@@ -177,7 +177,6 @@ myPlayer.volumeStart = function(ev){
 };
 myPlayer.volumeMove = function(ev){
 	var position = this.getPosInElement(ev, myPlayer.$volumeSlider);
-	console.log(position);
 	this.updateVolumeSlider(position.x);
 	this.api.setVolume(position.x);
 };
