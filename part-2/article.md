@@ -1,6 +1,8 @@
-In the previous part of the skin tutorial, we covered the initial setup in HTML, CSS and Javascript along with a play/pause button, a mute/unmute button and a simple time display. Although we got a good, working example, there are still a lot of features missing that every video player should have.
+In the [previous part](https://www.bluebillywig.com/nl/blog/skinning-blue-billywig-player-part-1-basic-controls) of the skin tutorial, we covered the initial setup in HTML, CSS and Javascript along with a play/pause button, a mute/unmute button and a simple time display. Although we got a good, [working example](http://bluebillywig.github.io/skin-tutorial/part-1/), there are still a lot of features missing that every video player should have.
 
 In part two of the custom skin tutorial, we will cover some more complicated user interface elements: The progress bar, volume bar and the video quality selector. If you have not done so, I strongly recommend reading through part one of the tutorial, since it covers some basic concepts that are important in the latter two parts of the tutorial.
+
+A working example can be found [here](http://bluebillywig.github.io/skin-tutorial/part-2/), the source code can be found [here](https://github.com/bluebillywig/skin-tutorial/tree/master/part-2), and the complete tutorial can be found [here](http://bluebillywig.github.io/skin-tutorial/).
 
 ## The progress bar
 
