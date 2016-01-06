@@ -49,7 +49,7 @@ a {
 	max-width: 400px;
 	width: 100%;
 	margin: 20px auto;
-	padding: 10px 20px;
+	padding: 15px 20px 10px;
 	border-radius: 5px;
 }
 
@@ -69,4 +69,55 @@ a {
 
 .mute.button, .unmute.button {
 	float: right;
+}
+
+.progressbar {
+	clear: both;
+	border-radius: 3px;
+	border: 1px solid #FFF;
+	margin: 5px 0;
+}
+.progressbar .progress-indicator {
+	background-color: #FFF;
+}
+
+.volume-slider {
+	float: right;
+	width: 100px;
+	border-radius: 3px;
+	border: 1px solid #FFF;
+	margin: 11px 0 11px 5px;
+}
+.volume-slider .volume-indicator {
+	background-color: #FFF;
+}
+
+.quality-selector {
+	float: left;
+	position: relative;
+}
+.quality-selector .button {
+	float: none;
+}
+.quality-list {
+	position: absolute;
+	bottom: 100%;
+	background-color: #FFF;
+    color: #333;
+    padding: 0;
+	margin: 0;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.quality-list li {
+	list-style: none;
+	padding: 5px 10px;
+    white-space: nowrap;
+	cursor: pointer;
+}
+.quality-list li:hover {
+	background-color: #EEE;
+    color: #333;
+}
+.quality-list li.active {
+	font-weight: bold;
 }
