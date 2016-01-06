@@ -1,6 +1,4 @@
-# Skinning the Blue Billywig player - Part 1: Basic controls
-
-In June 2014, we released our new online video player with version five. One of the biggest changes was an all new JavaScript API which enabled every script to take full control of the player. In this step-by-step guide we will build a new, custom skin using HTML, CSS and JavaScript. The end result can be viewed at **%TODO[INSERT LINK]**.
+In June 2014, we released our new online video player with version five. One of the biggest changes was an all new JavaScript API which enabled every script to take full control of the player. In this step-by-step guide we will build a new, custom skin using HTML, CSS and JavaScript. The end result can be viewed at the [GitHub page](http://bluebillywig.github.io/skin-tutorial/part-1/)).
 
 ## First things first
 
@@ -364,8 +362,8 @@ myPlayer.onTimeUpdate = function(){
 
 The way the time is formatted is fully customisable, and allows you to use elapsed time, remaining time, or even percentages. Do remember to account for videos that are more than an hour long. Even if you have none of those right now, they might be used in the future!
 
-## Conclusion
+## Wrapping up
 
 That's it! We created a very simple skin with the Blue Billywig Player API, with a play / pause button, a mute / unmute button and a time display. There are many more features that can be implemented, but those will be covered in future posts. If you want to be kept informed, please subscribe to our newsletter at the top of this page!
 
-The end result is available at **TODO: INSERT LINK**. To view the full code, please visit the [Github page](https://github.com/bluebillywig/skin-tutorial) with the source code.
+The end result is available at the [GitHub page](http://bluebillywig.github.io/skin-tutorial/part-1/). To view the full code, please visit the [Github page](https://github.com/bluebillywig/skin-tutorial) with the source code.
