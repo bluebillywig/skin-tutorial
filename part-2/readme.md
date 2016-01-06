@@ -100,13 +100,12 @@ Right now, our progress bar displays the correct progress. Next up is user inter
 Our progress bar can be used in multiple ways, clicking, dragging, what happens when the user drags out of the progress bar? These are all scenarios that have to be taken into account, and it is a good idea to identify all these scenarios in a very detailed manner:
 
 * Mouse down on the progress bar should:
-	* Pause the video (but not display the pause icon!)
+	* Pause the video (but not display the pause icon!).
 	* Move the indicator to the mouse position.
-	* Seek the video to that position (this allows the user to preview the frame at that position)
-	
+	* Seek the video to that position (this allows the user to preview the frame at that position).
 * Mouse move on the body after mouse down on the progress bar should:
 	* Move the indicator to the mouse position.
-	* Seek the video to that position
+	* Seek the video to that position.
 * Mouse up on the body after mouse down on the progress bar should:
 	* Move the indicator to the mouse position.
 	* Seek the video to that position.
