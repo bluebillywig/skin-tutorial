@@ -209,13 +209,38 @@ We will not be using the `gentleSeek` function, because when the user stops seek
 		}
 		..
 	};
-	
+
 Finally, we will also unbind the `move` and `end` event:
 
 	myPlayer.seekEnd = function(ev){
 		..
 		$(document).off('mousemove touchmove', this.seekMove);
 		$(document).off('mouseup touchend', this.seekEnd);
+	};
+
+As you might notice, the play button will change when we are dragging the progress bar. In order to avoid this, we save a variable `seeking` that wil prevent the button to change.
+
+	this.seeking = false;
+	
+	myPlayer.seekStart = function(ev){
+		this.seeking = true;
+		..
+	};
+	
+	myPlayer.seekEnd = function(ev){
+		this.seeking = false;
+		..
+	};
+	
+	myPlayer.onPlaying = function(){
+		if(!this.seeking){
+			this.$container.removeClass('paused').addClass('playing');
+		}
+	};
+	myPlayer.onPause = function(){
+		if(!this.seeking){
+			this.$container.removeClass('playing').addClass('paused');
+		}
 	};
 
 Right now, we have a fully working progress bar which we can use to seek in the video. We can extend the progress bar with more features (like displaying the time when seeking), but I leave that up to you to figure out.
@@ -311,5 +336,64 @@ Right now, the volume indicator will display the correct volume. However, it isn
 
 ## The quality selector
 
-The Blue Billywig Online Video Platform generates multiple assets for each video, to ensure the best possible playback experience. However, some users might want to manually adjust the quality they are seeing. We will render a list of all available *assets* (our name for the same videos with different qualities), indicating the active asset and the ability to select another one.
+The Blue Billywig Online Video Platform generates multiple assets for each video, to ensure the best possible playback experience. However, some users might want to manually adjust the quality they are seeing. We will render a list of all available *assets* (our name for the same videos with different qualities), indicating the active asset and the ability to select another one. In the HTML, we place a container that will contain all the available assets in an unordered list:
 
+	<div class="quality-selector">
+		<div class="quality button">
+			<i class="fa fa-cog"></i>
+		</div>
+		<ul class="quality-list">
+			<li class="active">Auto</li>
+		</ul>
+	</div>
+
+Next, we create a handler on the `assetlistchange` that will get the assets and store them in a variable. We will also listen to the `assetselected` event to store the active asset in a variable.
+
+	myPlayer.init = function(targetContainer){
+		..
+		this.assets = [];
+		this.activeAsset;
+		..
+		this.api.on('assetlistchange assetselected', $.proxy(this.onAssetChange, this));
+		..
+	};
+
+The handler updates the variables, and executes a function that renders the asset list. We render the whole asset list again every time something changes in the assets, since this event won't occur frequently. It makes our code a lot simpler and won't have a big impact in performance.
+
+	myPlayer.onAssetChange = function(){
+		this.assets = this.api.getAssets();
+		this.activeAsset = this.api.getCurrentAsset();
+		this.renderAssets();
+	};
+
+The `renderAssets` function loops through all the assets, and checks wether the asset is active and marks it as such.
+
+	myPlayer.renderAssets = function(){
+		this.$qualityList.empty();
+		for (var i = 0; i < this.assets.length; i++) {
+			var asset = this.assets[i];
+			var $element = $('<li />')
+				.text(asset.title)
+				.attr('id', asset.id);
+		
+			if(asset.id == this.activeAsset.id){
+				$element.addClass('active');
+			}
+			$element.on('click touchstart', $.proxy(this.selectAsset, this));
+			$element.appendTo(this.$qualityList);
+		}
+	};
+
+Every element gets a handler that selects the asset, which is very easy since we save the asset id in the `id` attribute of the element.
+
+	myPlayer.selectAsset = function(ev){
+		this.api.setAsset(ev.target.id);
+	};
+
+Thats all there is to the quality selector!
+
+## Wrapping up
+
+In this part of the tutorial, we created a progress bar that displays the progress and allows the user to seek through the video. The audio slider allows the user to change the volume and the quality selector will display the current quality, and allows the user to select a different quality. Our player skin is getting better and better, and provides a better experience to the end users.
+
+The next and final tutorial (part 3) addresses the non-playing states: The start screen which contains a big play button and a title, and the end screen which contains a replay button and a *next video* button. In addition, we will take a look at the full screen functionality.

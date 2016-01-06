@@ -15,13 +15,18 @@ myPlayer.init = function(targetContainer){
 	// Find the volume slider
 	this.$volumeSlider = this.$controlbar.find('.volume-slider');
 	this.$volumeIndicator = this.$volumeSlider.find('.volume-indicator');
+	// Find the quality list
+	this.$qualityList = this.$controlbar.find('.quality-list');
 	
 	// Init variables
 	this.duration = 0;
 	this.currentTime = 0;
 	this.volume = 1;
 	this.muted = false;
+	this.assets = [];
+	this.activeAsset;
 	
+	this.seeking = false;
 	this.seekWasPlaying = false;
 	
 	// Bind elements
@@ -42,6 +47,8 @@ myPlayer.init = function(targetContainer){
 	this.api.on('volumechange', $.proxy(this.onVolumeChange, this));
 	this.api.on('durationchange', $.proxy(this.onDurationChange, this));
 	this.api.on('timeupdate', $.proxy(this.onTimeUpdate, this));
+	
+	this.api.on('assetlistchange assetselected', $.proxy(this.onAssetChange, this));
 };
 
 /* Controls */
@@ -64,12 +71,14 @@ myPlayer.unmute = function(){
 
 /* EVENTS */
 myPlayer.onPlaying = function(){
-	// Logically, the video isn't paused when it's playing
-	this.$container.removeClass('paused').addClass('playing');
+	if(!this.seeking){
+		this.$container.removeClass('paused').addClass('playing');
+	}
 };
 myPlayer.onPause = function(){
-	// Logically, the video isn't playing when it's paused
-	this.$container.removeClass('playing').addClass('paused');
+	if(!this.seeking){
+		this.$container.removeClass('playing').addClass('paused');
+	}
 };
 
 myPlayer.onVolumeChange = function(){
@@ -92,6 +101,11 @@ myPlayer.onTimeUpdate = function(){
 	this.currentTime = this.api.getCurrentTime();
 	this.updateTimeElapsed();
 	this.updateProgressbar();
+};
+myPlayer.onAssetChange = function(){
+	this.assets = this.api.getAssets();
+	this.activeAsset = this.api.getCurrentAsset();
+	this.renderAssets();
 };
 
 /* Visuals */
@@ -121,6 +135,7 @@ myPlayer.updateProgressbar = function(position){
 };
 
 myPlayer.seekStart = function(ev){
+	this.seeking = true;
 	this.seekWasPlaying = this.api.isPlaying();
 	this.api.pause();
 	var position = this.getPosInElement(ev, myPlayer.$progressbar);
@@ -137,6 +152,7 @@ myPlayer.seekMove = function(ev){
 };
 
 myPlayer.seekEnd = function(ev){
+	this.seeking = false;
 	var position = this.getPosInElement(ev, myPlayer.$progressbar);
 	this.updateProgressbar(position.x);
 	this.api.seek(this.duration * position.x);
@@ -188,6 +204,25 @@ myPlayer.volumeEnd = function(ev){
 	$(document).off('mouseup touchend', this.volumeEnd);
 };
 
+/* Assets */
+myPlayer.renderAssets = function(){
+	this.$qualityList.empty();
+	for (var i = 0; i < this.assets.length; i++) {
+		var asset = this.assets[i];
+		var $element = $('<li />')
+			.text(asset.title)
+			.attr('id', asset.id);
+		
+		if(asset.id == this.activeAsset.id){
+			$element.addClass('active');
+		}
+		$element.on('click touchstart', $.proxy(this.selectAsset, this));
+		$element.appendTo(this.$qualityList);
+	}
+};
+myPlayer.selectAsset = function(ev){
+	this.api.setAsset(ev.target.id);
+};
 
 /* Helpers */
 myPlayer.formatSeconds = function(seconds){
@@ -222,7 +257,7 @@ $('#player').on('ready', function(){
 
 $(document).ready(function(){
 	// Add an API variable containing the Blue Billywig player
-	myPlayer.api = new bluebillywig.Player('//bluebillywig.bbvms.com/p/skin-tutorial/c/2530517.json', {
+	myPlayer.api = new bluebillywig.Player('//bluebillywig.bbvms.com/p/skin-tutorial/c/2575081.json', {
 		target: $('#player')[0]
 	});
 });

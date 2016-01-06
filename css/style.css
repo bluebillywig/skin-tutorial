@@ -91,3 +91,33 @@ a {
 .volume-slider .volume-indicator {
 	background-color: #FFF;
 }
+
+.quality-selector {
+	float: left;
+	position: relative;
+}
+.quality-selector .button {
+	float: none;
+}
+.quality-list {
+	position: absolute;
+	bottom: 100%;
+	background-color: #FFF;
+    color: #333;
+    padding: 0;
+	margin: 0;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.quality-list li {
+	list-style: none;
+	padding: 5px 10px;
+    white-space: nowrap;
+	cursor: pointer;
+}
+.quality-list li:hover {
+	background-color: #EEE;
+    color: #333;
+}
+.quality-list li.active {
+	font-weight: bold;
+}
