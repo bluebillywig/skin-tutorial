@@ -215,7 +215,7 @@ If the user drags behind the progress bar, we limit our seek position to 0.1 sec
 
 #### End event
 
-Now for the final event: ending the drag with mouse up / touch end. Bind the event on the body in the `seekStart` handler:
+Now for the final event: Ending the drag with mouse up / touch end. Bind the event on the body in the `seekStart` handler:
 
 <javascript>
 myPlayer.seekStart = function(ev){
@@ -413,7 +413,7 @@ myPlayer.init = function(targetContainer){
     this.api.on('assetlistchange assetselected', $.proxy(this.onAssetChange, this));
     ..
 };
-<javascript>
+</javascript>
 
 The handler updates the variables, and executes a function that renders the asset list. We render the whole asset list again every time something changes in the assets, since this event won't occur frequently. It makes our code a lot simpler and won't have a big impact in performance.
 
@@ -425,7 +425,7 @@ myPlayer.onAssetChange = function(){
 };
 </javascript>
 
-The `renderAssets` function loops through all the assets, and checks wether the asset is active and marks it as such.
+The `renderAssets` function loops through all the assets, and checks whether the asset is active and marks it as such.
 
 <javascript>
 myPlayer.renderAssets = function(){
@@ -453,7 +453,7 @@ myPlayer.selectAsset = function(ev){
 };
 </javascript>
 
-Thats all there is to the quality selector!
+That's all there is to the quality selector!
 
 ## Wrapping up
 
