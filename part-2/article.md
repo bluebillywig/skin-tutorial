@@ -1,6 +1,8 @@
-In the [previous part](https://www.bluebillywig.com/nl/blog/skinning-blue-billywig-player-part-1-basic-controls) of the skin tutorial, we covered the initial setup in HTML, CSS and Javascript along with a play/pause button, a mute/unmute button and a simple time display. Although we got a good, [working example](http://bluebillywig.github.io/skin-tutorial/part-1/), there are still a lot of features missing that every video player should have.
+The Blue Billywig video player already contains a skin that contains all functionality that you would expect from a video player, and can be perfectly tailored to your needs. However, there are certain scenarios that require a very specific skin design or integrate in very special ways into a website. For those edge cases, this tutorial provides a good starting point to create a custom skin.
 
-In part two of the custom skin tutorial, we will cover some more complicated user interface elements: The progress bar, volume bar and the video quality selector. If you have not done so, I strongly recommend reading through part one of the tutorial, since it covers some basic concepts that are important in the latter two parts of the tutorial.
+In the [previous part](https://www.bluebillywig.com/nl/blog/skinning-blue-billywig-player-part-1-basic-controls) of the skin tutorial, we covered the initial setup in HTML, CSS and Javascript along with a play/pause button, a mute/unmute button and a simple time display. Although we got a [working example](http://bluebillywig.github.io/skin-tutorial/part-1/), there are still a lot of features missing that every video player should have.
+
+In part two of the custom skin tutorial, we will cover some more complicated user interface elements: the progress bar, volume bar and the video quality selector. If you have not done so, I strongly recommend reading through part one of the tutorial, since it covers some basic concepts that are important in the latter two parts of the tutorial.
 
 A working example can be found [here](http://bluebillywig.github.io/skin-tutorial/part-2/), the source code can be found [here](https://github.com/bluebillywig/skin-tutorial/tree/master/part-2), and the complete tutorial can be found [here](http://bluebillywig.github.io/skin-tutorial/).
 
@@ -8,7 +10,7 @@ A working example can be found [here](http://bluebillywig.github.io/skin-tutoria
 
 One of the most common features in a video player is a progress bar, which allows the user to skip to a different part of the video, and gives a visual indication of the progress in the video.
 
-We can divide the development of the progress bar into two parts: Visualising the progress in the video, and interacting with the bar to jump to a certain time.
+We can divide the development of the progress bar into two parts: visualising the progress in the video and interacting with the bar to jump to a certain time.
 
 ### The HTML and CSS
 
@@ -53,7 +55,7 @@ this.$progressbar = this.$controlbar.find('.progressbar');
 this.$progressIndicator = this.$progressbar.find('.progress-indicator');
 </javascript>
     
-We set them both to 0, since we start the video at 0 seconds. The duration can be a point of discussion, but for the sake of simplicity, we set it also to 0.
+We set them both to 0, since we start the video at 0 seconds. The duration can be a point of discussion, but for the sake of simplicity, this variable is also set to 0.
 
 Next, we migrate the code to update the time display to separate functions:
 
@@ -80,7 +82,7 @@ myPlayer.onTimeUpdate = function(){
 };
 </javascript>
 
-One might argue that this structure is way to abstract for such a simple component, but I noticed that things can get very complicated later on when more features are added. One example might be the introduction of a live video broadcast, which naturally will not have a duration. The introduction of the progress bar will already show the benefit!
+One might argue that this structure is way too abstract for such a simple component, but I noticed that things can get very complicated later on when more features are added. One example might be the introduction of a live video broadcast, which naturally will not have a duration. The introduction of the progress bar will already show the benefit!
 
 <javascript>
 myPlayer.updateProgressbar = function(){
@@ -111,7 +113,7 @@ Right now, our progress bar displays the correct progress. Next up is user inter
 
 ### Seeking with the progress bar
 
-Our progress bar can be used in multiple ways, clicking, dragging, what happens when the user drags out of the progress bar? These are all scenarios that have to be taken into account, and it is a good idea to identify all these scenarios in a very detailed manner:
+Our progress bar can be used in multiple ways: clicking, touching, dragging, etc. But what happens when the user drags his cursor outside the progressbar? These are all scenarios that have to be taken into account, and it is a good idea to identify all these scenarios in a very detailed manner:
 
 * Mouse down on the progress bar should:
 	* Pause the video (but not display the pause icon!).
@@ -284,7 +286,7 @@ myPlayer.onPause = function(){
 };
 </javascript>
 
-Right now, we have a fully working progress bar which we can use to seek in the video. We can extend the progress bar with more features (like displaying the time when seeking), but I leave that up to you to figure out.
+Right now, we have a fully working progress bar which we can use to seek in the video. We can extend the progress bar with more features (like displaying the time when seeking), this tutorial should provide you with enough clues to further develop this element.
 
 ## The volume controls
 
@@ -349,7 +351,7 @@ myPlayer.updateVolumeSlider = function(position){
 };
 </javascript>
 
-Note that we set the percentage to 0 if the volume is muted. This is a user interface choice, but in my opinion it would make sense.
+Note that we set the percentage to 0 if the volume is muted. This is a user interface choice, but I think this makes the most sense.
 
 Next up are the events that update the volume if the player itself changes the volume (this could happen when there are interactive elements in the video that influence the volume). Since we already have a function that handles volume changes, we can add it there:
 
@@ -457,6 +459,6 @@ That's all there is to the quality selector!
 
 ## Wrapping up
 
-In this part of the tutorial, we created a progress bar that displays the progress and allows the user to seek through the video. The audio slider allows the user to change the volume and the quality selector will display the current quality, and allows the user to select a different quality. Our player skin is getting better and better, and provides a better experience to the end users.
+In this part of the tutorial, we created a progress bar that displays the progress and allows the user to seek through the video. The audio slider allows the user to change the volume and the quality selector will display the current quality and allows the user to select a different quality. Our player skin is getting better and better, and provides a better experience to the end users.
 
 The next and final tutorial (part 3) addresses the non-playing states: The start screen which contains a big play button and a title, and the end screen which contains a replay button and a *next video* button. In addition, we will take a look at the full screen functionality.
