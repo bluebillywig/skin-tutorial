@@ -1,0 +1,112 @@
+#player {
+	position: relative;
+	height: 720px;
+	width: 1280px;
+	margin: 20px auto;
+}
+
+.skin {
+	/* Overlay skin on top of the video */
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.controlbar {
+	/* Stick controlbar to the bottom of the skin */
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+/* Show play button on default */
+.pause.button {
+	display: none;
+}
+.play.button {
+	display: block;
+}
+.replay.button {
+	display: none;
+}
+
+#player.playing .play.button {
+	display: none;
+}
+#player.playing .pause.button {
+	display: block;
+}
+#player.ended .replay.button {
+	display: block;
+}
+#player.ended .play.button {
+	display: none;
+}
+
+/* Show mute button on default */
+.unmute.button {
+	display: none;
+}
+.mute.button {
+	display: block;
+}
+
+#player.muted .mute.button {
+	display: none;
+}
+#player.muted .unmute.button {
+	display: block;
+}
+
+/* Progressbar */
+.progressbar {
+	position: relative;
+	height: 5px;
+}
+.progressbar .progress-indicator {
+	height: 100%;
+	width: 0%;
+}
+
+/* Volume slider */
+.volume-slider {
+	position: relative;
+	height: 5px;
+}
+
+.volume-slider .volume-indicator {
+	height: 100%;
+	width: 100%;
+}
+
+.quality-selector {
+	
+}
+.quality-selector .quality-list {
+	display: none;
+}
+.quality-selector:hover .quality-list {
+	display: block;
+}
+
+.big-play {
+    display: block;
+}
+#player.playing .big-play, #player.paused .big-play, #player.ended .big-play {
+	display: none;
+}
+.play-next {
+	display: none;
+}
+#player.ended .play-next {
+	display: block;
+}
+
+#player.fullscreen {
+	width: 100%;
+	height: 100%;
+}
