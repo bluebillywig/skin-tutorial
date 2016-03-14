@@ -211,3 +211,9 @@ As you can see, the player retains its original size, so we need to stretch it t
 		height: 100%;
 	}
 </css>
+
+## Wrapping up
+
+In the past three tutorials, we have created a custom skin on top of the Blue Billywig player. Basic controls like play, pause, volume adjustments, and more advanced controls like seeking, quality selection and fullscreen. The skin that was created in the tutorial is but an example of what is possible with the Blue Billywig player, and many more improvements can be made.
+
+Building a feature complete skin that works like users expect it to work, might take more work than you would imagine at first. Luckily, the Blue Billywig default skin is often sufficient in terms of functionality and customisability. But when you do require a tailor made design, this tutorial should give you a head start at building your own skin.
