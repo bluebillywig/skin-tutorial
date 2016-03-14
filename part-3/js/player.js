@@ -85,7 +85,7 @@ myPlayer.unmute = function(){
 };
 
 myPlayer.playNext = function(){
-	if(this.relatedClips != null && typeof this.relatedClip[0] != undefined){
+	if(this.relatedClips != null && typeof this.relatedClips[0] != 'undefined'){
 		var nextClipId = this.relatedClips[0].id;
 		this.api.load({'clipId': nextClipId});
 	} else {
@@ -286,7 +286,7 @@ myPlayer.renderAssets = function(){
 			.text(asset.title)
 			.attr('id', asset.id);
 		
-		if(asset.id == this.activeAsset.id){
+		if(this.activeAsset != null && asset.id == this.activeAsset.id){
 			$element.addClass('active');
 		}
 		$element.on('click touchstart', $.proxy(this.selectAsset, this));
