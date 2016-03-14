@@ -121,3 +121,37 @@ a {
 .quality-list li.active {
 	font-weight: bold;
 }
+
+.big-play, .play-next {
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px -50px 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 5px;
+    text-align: center;
+    padding: 20px 0 20px 10px;
+    box-sizing: border-box;
+	cursor: pointer;
+}
+.big-play i, .play-next i {
+	display: block;
+	color: #FFF;
+	font-size: 60px;
+}
+.play-next {
+	padding: 10px;
+	color: #FFF;
+}
+.fullscreen.button .fa-compress {
+	display: none;
+}
+#player.fullscreen .fullscreen.button .fa-expand {
+	display: none;
+}
+#player.fullscreen .fullscreen.button .fa-compress {
+	display: block;
+}
