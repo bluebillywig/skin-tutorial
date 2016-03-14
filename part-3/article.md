@@ -1,4 +1,4 @@
-In part 1, we created our custom skin and added basic controls. In part 2, we added more advanced controls to further improve the user experience. In part 3, we will further improve our custom skin with a start- and end screen. The start screen will contain the media clip title and a big play button. The end screen will contain a replay button and a button to continue to the next video. Finally, we will add a full screen button which allows the video to be played in glorious full screen.
+In [part 1](https://www.bluebillywig.com/nl/blog/skinning-blue-billywig-player-part-1-basic-controls), we created our custom skin and added basic controls. In [part 2](https://www.bluebillywig.com/en/blog/skinning-blue-billywig-player-part-2-advanced-controls), we added more advanced controls to further improve the user experience. In part 3, we will further improve our custom skin with a start- and end screen. The start screen will contain the media clip title and a big play button. The end screen will contain a replay button and a button to continue to the next video. Finally, we will add a full screen button which allows the video to be played in glorious full screen.
 
 A working example can be found [here](http://bluebillywig.github.io/skin-tutorial/part-3/), the source code can be found [here](https://github.com/bluebillywig/skin-tutorial/tree/master/part-3), and an overview of the complete tutorial can be found [here](http://bluebillywig.github.io/skin-tutorial/).
 
@@ -217,3 +217,9 @@ As you can see, the player retains its original size, so we need to stretch it t
 In the past three tutorials, we have created a custom skin on top of the Blue Billywig player. Basic controls like play, pause, volume adjustments, and more advanced controls like seeking, quality selection and fullscreen. The skin that was created in the tutorial is but an example of what is possible with the Blue Billywig player, and many more improvements can be made.
 
 Building a feature complete skin that works like users expect it to work, might take more work than you would imagine at first. Luckily, the Blue Billywig default skin is often sufficient in terms of functionality and customisability. But when you do require a tailor made design, this tutorial should give you a head start at building your own skin.
+
+[Working example](http://bluebillywig.github.io/skin-tutorial/part-3/)
+
+[Source code](https://github.com/bluebillywig/skin-tutorial/tree/master/part-3)
+
+[Tutorial overview](http://bluebillywig.github.io/skin-tutorial/)
